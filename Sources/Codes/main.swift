@@ -16,85 +16,64 @@ func main() {
 
 
     //Dados Ilusorios
-    var pessoa1: Pessoa = Pessoa(nome: "Erick", sexo: "M", idade: 69, isFumante: true, isDiabetico: true, isDcv: true, isFa: true, pss: 120, isHrx: true)
+    var pessoa1: Pessoa = Pessoa(nome: "Erick", sexo: "M", idade: 57, isFumante: false, isDiabetico: false, isDcv: false, isFa: true, pss: 135, isHrx: true)
     
     
     var score: Double = 0;
     
     var L: Double = 0;
-    var M: Double = 0;
+    var maleM: Double = 4.4227101;
     
     
     func calcLMale() {
-        L = 0.49716 * (pessoa1.idade/10);
-        
+        L = agePoint * (pessoa1.idade/10);
+        print("Estagio 1", L)
         if (pessoa1.isFumante) {
             L += smoke;
+            print("Estagio 2", L)
         }
-        else if(pessoa1.isDcv) {
+        if(pessoa1.isDcv) {
             L += dcv;
+            print("Estagio 3", L)
         }
-        else if(pessoa1.isFa){
+        if(pessoa1.isFa){
             L += fa;
+            print("Estagio 4", L)
         }
-        else if(pessoa1.idade >= 65){
+        if(pessoa1.idade >= 65){
             L += ageMore65;
+            print("Estagio 5", L)
         }
                 
-        else if(pessoa1.idade < 65 && pessoa1.isDiabetico) {
+        if(pessoa1.idade < 65 && pessoa1.isDiabetico) {
             L += diabete;
-        }
-        else if(pessoa1.idade >= 65 && pessoa1.isDiabetico) {
+            print("Estagio 6", L)
+        } else if(pessoa1.idade >= 65 && pessoa1.isDiabetico) {
             L += diabete65;
+            print("Estagio 7", L)
         }
-        else if(pessoa1.isHrx){
+        
+        if(pessoa1.isHrx){
             L += hrx;
-            L += pssBlood * (pessoa1.pss/120)
+            L += pssBlood * ((pessoa1.pss-120)/10)
+            print("Estagio 8", L)
         }
         else if(pessoa1.isHrx == false) {
-            L += pssNoBlood * (pessoa1.pss/120)
+            L += pssNoBlood * ((pessoa1.pss-120)/10)
+            print("Estagio 1", L)
         }
     }
-    func calcM() {
-        let betaCoefficients = [
-            agePoint,
-            smoke,
-            dcv,
-            fa,
-            ageMore65,
-            diabete,
-            diabete65,
-            hrx,
-            pssNoBlood,
-            pssBlood,
-          ]
-          let means = [
-            pessoa1.idade / 10,
-            pessoa1.isFumante ? 1 : 0,
-            pessoa1.isDcv ? 1 : 0,
-            pessoa1.isFa ? 1 : 0,
-            pessoa1.idade >= 65 ? 1 : 0,
-            pessoa1.isDiabetico ? 1 : 0,
-            pessoa1.idade >= 65 && pessoa1.isDiabetico ? 1 : 0,
-            pessoa1.isHrx ? 1 : 0,
-            pessoa1.pss / 120, // Assuming mean PSS is
-            pessoa1.isHrx ? pssBlood : pssNoBlood,
-          ]
-          
-          var sum = 0.0
-          for (i, beta) in betaCoefficients.enumerated() {
-            sum += beta * means[i]
-          }
-          M = sum
-    }
+
     
     func calcFsrs() {
         let time10y = 0.94451;
-        print(M)
-        score = 1 - (pow(time10y, L-M))
-        print(score)
+        var expoente = L - maleM;
+    
+        print(1 - pow(5, 2))
+        score = 1 - powl(time10y, expoente)
+        
         //Transforma em porcentagem
-        score = score / 100;
+        
         
         print("Sua chance e: ", score)
     }
@@ -102,7 +81,7 @@ func main() {
     
     
     calcLMale()
-    calcM()
+ 
     calcFsrs()
 }
 
