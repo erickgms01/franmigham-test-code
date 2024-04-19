@@ -70,8 +70,10 @@ func calcFsrs() {
     // Transforma o escore em porcentagem
     let scorePorcent = femaleScore * 100
     
-    print("------------------------------------")
-    print("Sua chance em porcentagem é: ", scorePorcent)
+    let formatNumber = String(format: "%.2f", scorePorcent)
+    print("------------------------------------\n")
+    print("Sua chance em porcentagem é: ", formatNumber)
+    print("\n------------------------------------")
 }
 
 // Documentação:

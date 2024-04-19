@@ -30,13 +30,15 @@ func main() {
     // Criação de outra instância de Pessoa para teste
     let pessoa3: Pessoa = Pessoa(nome: "Erick",
                                  sexo: "M",
-                                 idade: 57,
-                                 isFumante: false,
-                                 isDiabetico: false,
-                                 isDcv: false,
+                                 idade: 86,
+                                 isFumante: true,
+                                 isDiabetico: true,
+                                 isDcv: true,
                                  isFa: true,
-                                 pss: 135,
+                                 pss: 145,
                                  isHrx: true)
+    calcLMale(pessoa: pessoa3)
+    maleCalcFsrs()
 }
 
 // Chamada da função principal para iniciar o programa

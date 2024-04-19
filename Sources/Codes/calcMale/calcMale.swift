@@ -69,9 +69,8 @@ func maleCalcFsrs() {
     // Transforma o escore em porcentagem
     let scorePorcent = maleScore * 100
     
-    print(maleL)
-    print(maleMean)
+    let formatNumber = String(format: "%.2f", scorePorcent)
     print("------------------------------------\n")
-    print("Sua chance em porcentagem é: ", scorePorcent)
+    print("Sua chance em porcentagem é: ", formatNumber)
     print("\n------------------------------------")
 }
